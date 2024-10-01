@@ -163,7 +163,9 @@ public struct ICalendarEvent: VComponent {
     ///
     /// See https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcical/38b4e7a9-8dec-488a-a901-85cfe71171d8
     public var xMicrosoftCDOImportance: ICalendarMicrosoftImportance?
-    
+
+    public var xAppleTravelDuration: ICalendarDuration?
+
     
     // TODO: Define properties that can be specified multiple times:
     // public var attachments
@@ -214,7 +216,8 @@ public struct ICalendarEvent: VComponent {
             .line("DTEND", dtend),
             .line("DURATION", duration),
             .line("RECURRENCE-ID", recurrenceId),
-            .line("RRULE", rrule)
+            .line("RRULE", rrule),
+            .line("X-APPLE-TRAVEL-DURATION", xAppleTravelDuration),
         ]
     }
 
@@ -244,7 +247,8 @@ public struct ICalendarEvent: VComponent {
         xMicrosoftCDOAllDayEvent: Bool? = nil,
         xMicrosoftCDOBusyStatus: ICalendarMicrosoftStatus? = nil,
         xMicrosoftCDOIntendedStatus: ICalendarMicrosoftStatus? = nil,
-        xMicrosoftCDOImportance: ICalendarMicrosoftImportance? = nil
+        xMicrosoftCDOImportance: ICalendarMicrosoftImportance? = nil,
+        xAppleTravelDuration: ICalendarDuration? = nil
     ) {
         self.dtstamp = dtstamp
         self.uid = uid
@@ -272,6 +276,7 @@ public struct ICalendarEvent: VComponent {
         self.xMicrosoftCDOBusyStatus = xMicrosoftCDOBusyStatus
         self.xMicrosoftCDOIntendedStatus = xMicrosoftCDOIntendedStatus
         self.xMicrosoftCDOImportance = xMicrosoftCDOImportance
+        self.xAppleTravelDuration = xAppleTravelDuration
 
         assert(dtend == nil || duration == nil, "End date/time and duration must not be specified together!")
     }
